@@ -72,26 +72,26 @@ function App() {
   // return <div style={style}>{name}</div>;
 
   // 바로 사용도 가능함.
-  // return (
-  //   <div style={{ backgroundColor: "red", color: "yellow", fontSize: "50px" }}>
-  //     {name}
-  //     <div className="reactTest">이현석2</div>
-  //   </div>
-  // );
-
-  // 반드시 닫아야하는 태그, input
   return (
-    <div>
-      {/* JSX에서의 기본 주석의 모양 */}
-      {/* IDE인 VSCode에서 주석하고 싶다. -> ctrl + / 하면 보통 자동으로 주석 처리 해줌 */}
-      {/* // : 이런 주석은 그대로 표기 1 , /*:  이런 주석도 그대로 표기 2 */}
-      <form>
-        이름 : <br />
-        <input />
-        <input></input>
-      </form>
+    <div style={{ backgroundColor: "red", color: "yellow", fontSize: "50px" }}>
+      {name}
+      <div className="reactTest">이현석2</div>
     </div>
   );
+
+  // 반드시 닫아야하는 태그, input
+  // return (
+  //   <div>
+  //     {/* JSX에서의 기본 주석의 모양 */}
+  //     {/* IDE인 VSCode에서 주석하고 싶다. -> ctrl + / 하면 보통 자동으로 주석 처리 해줌 */}
+  //     {/* // : 이런 주석은 그대로 표기 1 , /*:  이런 주석도 그대로 표기 2 */}
+  //     <form>
+  //       이름 : <br />
+  //       <input />
+  //       <input></input>
+  //     </form>
+  //   </div>
+  // );
 }
 
 export default App;
