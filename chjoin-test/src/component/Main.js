@@ -1,25 +1,26 @@
 // Main 임시 페이지
-// rsc 기본 세팅
-
 import React from "react";
-// yarn add react-router-dom 로 설치(그래야 import 가능)
-// npm add react-router-dom 로 설치
-// 라우팅 모듈, 도구 설치.
+// yarn add react-router-dom
+// npm install react-router-dom
+// 라우팅 모듈 , 도구 설치.
+// import { useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 
-// styled-component, 컴포넌트에서 좀더 편하게 css 작업하는 모듈.
+// styled-component,  컴포넌트에서 좀더 편하게 css  작업하는 모듈.
 // yarn add styled-components
-// npm add styled-components
+// npm install styled-components
 // 확장팩: styled-components
 // 설치 후, 모듈 가져와서 사용하기.
-// 공식문서
-
+// 공식 문서
+// https://styled-components.com/docs/basics#getting-started
 import styled from "styled-components";
+import { Component } from "react";
 
 // styled-component 사용해보기
 // 예제
-// styled. 원하는(적용하고 싶은) 태그 선택 -> `(백틱) `(백틱)으로 열고 닫고
+// styled.원하는태그(적용하고 싶은태그) 선택 `(백틱)   `(백틱),열고 닫고
+// 이 사이에 css 문법을 작성.
 const MainTitleTextCss = styled.p`
   font-size: 30px;
   font-weight: bold;
@@ -27,9 +28,9 @@ const MainTitleTextCss = styled.p`
 `;
 
 const MainTextCss = styled.p`
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
-  background-color: aqua;
+  background-color: red;
   text-align: center;
 `;
 
@@ -60,7 +61,7 @@ const Container = styled.div`
 `;
 
 const Main = () => {
-  // useNavigate 라는 훅스(hooks)를 이용해서, 페이징하기..
+  // useNavigate 라는 훅스를 이용해서, 페이징 하기..
   const navigate = useNavigate();
 
   return (
@@ -69,13 +70,10 @@ const Main = () => {
         <h1>메인 화면입니다.</h1>
         {/* css 적용하기 */}
         <Container>
-          <MainTitleTextCss>styled-Components test</MainTitleTextCss>
+          <MainTitleTextCss>styled-components test</MainTitleTextCss>
 
-          <MainTextCss>2번째 텍스트 효과 확인하기</MainTextCss>
-
+          <MainTextCss>2번째 텍스트 효과 확인하기.</MainTextCss>
           {/* join 컴포넌트로 이동하는 버튼 하나 추가 */}
-          {/* 이벤트 핸들러인 onClick에선 화살표함수를 사용해야함 */}
-          {/* <Button title="회원가입 이동" type="primary" onClick={navigate("/join")}> : 잘못된 표현 */}
           <Button
             title="회원가입 이동"
             type="primary"
@@ -95,6 +93,17 @@ const Main = () => {
             }}
           >
             mycount 이동
+          </Button>
+
+          <br />
+          <Button
+            title="스크롤 ref 테스트 이동"
+            type="dashed"
+            onClick={() => {
+              navigate("/scrollRefTest");
+            }}
+          >
+            스크롤 ref 테스트 이동
           </Button>
         </Container>
       </div>
