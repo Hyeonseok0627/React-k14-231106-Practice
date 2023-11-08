@@ -8,6 +8,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 
+// styled-component, 컴포넌트에서 좀더 편하게 css 작업하는 모듈.
+// yarn add styled-components
+// npm add styled-components
+// 확장팩: styled-components
+
 const Main = () => {
   // useNavigate 라는 훅스(hooks)를 이용해서, 페이징하기..
   const navigate = useNavigate();
@@ -26,6 +31,17 @@ const Main = () => {
         }}
       >
         회원가입 이동
+      </Button>
+      <br />
+      <br />
+      <Button
+        title="mycount 이동"
+        type="primary"
+        onClick={() => {
+          navigate("/mycount");
+        }}
+      >
+        mycount 이동
       </Button>
     </div>
   );
