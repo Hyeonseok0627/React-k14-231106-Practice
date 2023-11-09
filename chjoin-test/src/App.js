@@ -16,6 +16,7 @@ import LifeCycleTest from "./ch7_classLifeCycle/LifeCycleTest";
 import InfoTestUseState from "./ch8_hooksTest/InfoTestUseState";
 import InfoTestUseEffect from "./ch8_hooksTest/InfoTestUseEffect";
 import CountUseReducerTest from "./ch8_hooksTest/CountUseReducerTest";
+import InfoTestUseReducer from "./ch8_hooksTest/InfoTestUseReducerTest";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="UseStateTest" element={<InfoTestUseState />} />
         <Route path="UseEffectTest" element={<InfoTestUseEffect />} />
         <Route path="UseReducerTest" element={<CountUseReducerTest />} />
+        <Route path="UseReducerTest2" element={<InfoTestUseReducer />} />
       </Routes>
     </BrowserRouter>
   );
