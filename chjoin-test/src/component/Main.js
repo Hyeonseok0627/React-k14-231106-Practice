@@ -71,7 +71,6 @@ const Main = () => {
         {/* css 적용하기 */}
         <Container>
           <MainTitleTextCss>styled-components test</MainTitleTextCss>
-
           <MainTextCss>2번째 텍스트 효과 확인하기.</MainTextCss>
           {/* join 컴포넌트로 이동하는 버튼 하나 추가 */}
           <Button
@@ -94,7 +93,6 @@ const Main = () => {
           >
             mycount 이동
           </Button>
-
           <br />
           <Button
             title="스크롤 ref 테스트 이동"
@@ -105,18 +103,16 @@ const Main = () => {
           >
             스크롤 ref 테스트 이동
           </Button>
-
           <br />
           <Button
             title="list 키 설정의무 확인 및 데이터 추가 삭제"
-            type="link"
+            type="primary"
             onClick={() => {
               navigate("/listKeyDataAddDel");
             }}
           >
             키 설정의무 확인 및 데이터 추가 삭제 이동
           </Button>
-
           <br />
           <Button
             title="클래스형 컴포넌트 생명주기 테스트 "
@@ -127,9 +123,21 @@ const Main = () => {
           >
             클래스형 컴포넌트 생명주기 테스트
           </Button>
+          <br />
+          <Button
+            title="useStateTest 테스트 "
+            type="primary"
+            onClick={() => {
+              navigate("/useStateTest");
+            }}
+          >
+            useStateTest 테스트
+          </Button>
+          useStateTest
         </Container>
       </div>
     </Wrapper>
   );
 };
+
 export default Main;
