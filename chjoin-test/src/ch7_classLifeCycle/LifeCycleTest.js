@@ -21,6 +21,10 @@ class LifeCycleTest extends Component {
   myRef = null;
 
   //생성자 호출, 생명주기 1번째
+
+  // 여기서, 부모로부터 전달 받은 props의 내용이 담겨져 있음.
+  // 초기화를 하면서, 자식 입장에서 사용이 된다.
+  // props.color
   constructor(props) {
     // 클래스가 혼자 동작 못하고, 반드시 누군가 부모를 상속받아야함.
     // 부모를 초기화 해주기
@@ -90,7 +94,7 @@ class LifeCycleTest extends Component {
 
   //3번째 호출 : 마운트 트리, 화면에 그려주는 역할 함수.
   render() {
-    console.log("순서 3번 째 render 호출: 마운트 또는 업데이트시 호출");
+    console.log("3번째 render 호출: 마운트 또는 업데이트시 호출");
 
     // 기본 스타일링
     const style = {
