@@ -39,8 +39,11 @@ const InfoTestUseReducer = () => {
     <div>
       <div>
         {/* 입력창인데, 값을 입력시, onChange 이벤트 핸들러 동작해서, 결과 뷰에 반영 */}
-        <input name={name} value={name} onChange={onChange} />
-        <input name={nickname} value={nickname} onChange={onChange} />
+        {/* input name={name}  , input name={nickname}: 이러면 안되고 "name" ,"nickname"으로 해줘야함 
+        속성은 ""표시로 문자열 나타내주는 것이라..-> 이래서 화면에 기입이 안되는 문제 발생 */}
+
+        <input name="name" value={name} onChange={onChange} />
+        <input name="nickname" value={nickname} onChange={onChange} />
       </div>
       {/* 결과 뷰 출력 */}
       <div>
