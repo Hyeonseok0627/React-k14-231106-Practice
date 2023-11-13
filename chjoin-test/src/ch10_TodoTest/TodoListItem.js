@@ -1,11 +1,7 @@
 import React from "react";
 
-// 리엑트 공식문서에서 가져옴
 // https://react-icons.github.io/react-icons/search?q=checkbox
-
 // https://react-icons.github.io/react-icons/search?q=remove
-
-// from "react-icons/md" : react-icons 사이트에서, md 폴더를 선택
 import {
   MdCheckBox,
   MdCheckBoxOutlineBlank,
@@ -14,28 +10,31 @@ import {
 
 // css 파일을 분리해서 작업하지만,
 // 해당 컴포넌트 내부에서 한번에 css 작업을 같이 하는 경우가 많음.
-import styled from "styled-components"; // import styled 치면 자동완성이 됨.
-import TodoMain from "./TodoMain";
-import TodoList from "./TodoList";
+import styled from "styled-components";
+
+//조건부 렌더링 쉽게 이용하기 위한 도구 가져오기.
+// yarn add classnames : 이미 설치 했음.
+//     "classnames": "^2.3.2",
+import cn from "classnames";
 
 // 작업 순서
-// 1) TodoListItemCss, 2) CheckboxCss, 3) TextCss, 4) RemoveCss
+// 1) TodoListItemCss , 2)CheckboxCss 3) TextCss 4)RemoveCss
 
-// 컴포넌트 내부에, 각 요소에 css 작업을 해보기.
+// 컴포넌트 내부에, 각 요소에 css 작업 해보기.
 
 const TodoListItemCss = styled.div`
   padding: 1rem;
   display: flex;
   align-items: center;
-  /* 짝수 번째 자식 요소의 배경색 지정,  &: 현재 본인 요소, div를 가리킴 */
+  /* 짝수 번째 자식 요소의 배경색 지정  & : 현재 본인 요소, div */
   &:nth-child(even) {
-    background: #f8f9fa; // js파일에선 색상이 나타나지 않아 css파일에서 확인하면 됨.
+    background: #f8f9fa;
   }
   &.checked {
     svg {
       color: #22b8cf;
     }
-    /text {
+    .text {
       color: #adb5bd;
       text-decoration: line-through;
     }
@@ -43,7 +42,7 @@ const TodoListItemCss = styled.div`
 `;
 const CheckboxCss = styled.div`
   cursor: pointer;
-  /* 차지할 수 있는 영역 모두 차지, */
+  /* 차지 할수 있는 영역 모두 차지 ,  */
   flex: 1;
   display: flex;
   align-items: center;
@@ -66,23 +65,36 @@ const RemoveCss = styled.div`
   }
 `;
 
-// 부모 컴포넌트 TodoList로 부터 전달 받은 속성
+// 부모 컴포넌트 TodoList 로 부터 전달 받은 속성
 // <TodoListItem todo={todo} key={todo.id} />
-// todo = {id: 1. text="내용", checked : true}
+// todo = {id:1, text="내용", checked : true}
 const TodoListItem = ({ todo }) => {
   // const text = todo.text
   // const checked = todo.checked
-  // 위에 두 줄을 밑에 한줄로 대체한 것
   const { text, checked } = todo;
   return (
-    // 부모로부터 받은 더미 데이터를 사용하면 됨.
+    // 부모로 부터 받은 더미 데이터를 사용하면 됨.
     // 전달.
-    // 1) TodoMain -> TodoList  -> TodoListItem : 더미데이터가 전달 중, props로
+    // 1) TodoMain -> TodoList -> TodoListItem : 더미데이터가 전달중, props로
+
+    // 조건부 렌더링 하기.
+    // 도구를 사용하기.  classnames 모듈이 이용해서, 쉽게 조건부 렌더링 하기.
+    //
     <TodoListItemCss>
-      <CheckboxCss>
-        <MdCheckBoxOutlineBlank />
-        {/* 더미데이터 내용 중  text 가져오기
-        <TextCss>샘플 할일</TextCss> */}
+      {/* cn 이용하면, checkbox라는 속성이  checked 의 속성에 의해서 
+      true 이면 , className에 등록이 되고, 
+      false 이면 , className에 등록이 안됨,  */}
+      <CheckboxCss className={cn("checkbox", { checked })}>
+        {/* 체크박스의 상태를 표시하는 checked 변수를 기준으로, 
+        조건이 true : MdCheckBox 를 사용하고 
+        조건이 false : MdCheckBoxOutlineBlank 를 사용하기 */}
+
+        {/* 조건부 렌더링 cn 이용해서 하기.  */}
+        {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+
+        {/* 조건이 true : MdCheckBox 를 사용하고  */}
+        {/* 더미데이터 내용중 text 가져오기 */}
+        {/* <TextCss>샘플 할일</TextCss> */}
         <TextCss>{text}</TextCss>
       </CheckboxCss>
       <RemoveCss>
