@@ -61,15 +61,30 @@ const TodoMain = () => {
   );
 
   // 지우기 기능 함수 추가하기.
-  // 데이터 추가 시: 내장 함수, concat을 이용해서, 새로운 배열 생성.
-  // 데이터 삭제 시: 내장 함수, filter를 이용해서, 새로운 배열 생성.
-  // 콜백함수, 조건이 일치하는 요소만 뽑아서, 새로 생성함.
+  // 데이터 추가시 : 내장 함수 , concat 이용해서, 새로운 배열생성.
+  // 데이터 삭제시 : 내장 함수, filter 이용해서,  새로운 배열생성.
+  // 콜백함수 , 조건 일치하는 요소만 뽑아서, 새로 생성함.
   const onRemove = useCallback(
     (id) => {
-      // 만약, id가 2를 선택했다면, todo.id !==id,
+      // 만약, id가 2를 선택했다면, todo.id !== id,
       // 선택된 id 2를 제외한 나머지 요소를 뽑아서(필터해서) 새로운 배열 생성
       // 결론, 선택된 id 2를 제거하는 효과와 같다.
       setTodos(todos.filter((todo) => todo.id !== id));
+    },
+    [todos]
+  );
+
+  //토글(스위치, on/off), checkbox 부분에 , 이벤트 핸들러 추가하기.
+  // onToggle 이라는 이름. 함수를 자식 컴포넌트에게 전달하기.
+  // 설정, 순서1
+  const onToggle = useCallback(
+    (id) => {
+      setTodos(
+        //선택된 todo의 id가 일치하면, 기존 배열을 복사해서, 선택된 id의 속성 checked 부분 변경시키기
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo
+        )
+      );
     },
     [todos]
   );
@@ -81,7 +96,8 @@ const TodoMain = () => {
         <TodoInsert onInsert={onInsert} />
         {/* 위에서 만든 임시 데이터 배열를 전달 : props 속성으로 전달 */}
         {/* 제거하는 함수를 props를 이용해서, 전달 */}
-        <TodoList todos={todos} onRemove={onRemove} />
+        {/* 순서2, 적용하기. 체크하는 함수를 props를 이용해서, 전달 */}
+        <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
       </TodoBase>
     </Main_css>
   );
