@@ -15,6 +15,8 @@ import {
 // css 파일을 분리해서 작업하지만,
 // 해당 컴포넌트 내부에서 한번에 css 작업을 같이 하는 경우가 많음.
 import styled from "styled-components"; // import styled 치면 자동완성이 됨.
+import TodoMain from "./TodoMain";
+import TodoList from "./TodoList";
 
 // 작업 순서
 // 1) TodoListItemCss, 2) CheckboxCss, 3) TextCss, 4) RemoveCss
@@ -64,12 +66,24 @@ const RemoveCss = styled.div`
   }
 `;
 
-const TodoListItem = () => {
+// 부모 컴포넌트 TodoList로 부터 전달 받은 속성
+// <TodoListItem todo={todo} key={todo.id} />
+// todo = {id: 1. text="내용", checked : true}
+const TodoListItem = ({ todo }) => {
+  // const text = todo.text
+  // const checked = todo.checked
+  // 위에 두 줄을 밑에 한줄로 대체한 것
+  const { text, checked } = todo;
   return (
+    // 부모로부터 받은 더미 데이터를 사용하면 됨.
+    // 전달.
+    // 1) TodoMain -> TodoList  -> TodoListItem : 더미데이터가 전달 중, props로
     <TodoListItemCss>
       <CheckboxCss>
         <MdCheckBoxOutlineBlank />
-        <TextCss>샘플 할일</TextCss>
+        {/* 더미데이터 내용 중  text 가져오기
+        <TextCss>샘플 할일</TextCss> */}
+        <TextCss>{text}</TextCss>
       </CheckboxCss>
       <RemoveCss>
         <MdRemoveCircleOutline />

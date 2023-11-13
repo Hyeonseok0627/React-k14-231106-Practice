@@ -8,14 +8,23 @@ const TodoListCss = styled.div`
   max-height: 513px;
   overflow-y: auto;
 `;
-
-const TodoList = () => {
+// 부모에서 전달한 props 속성을, 자식 컴포넌트에서 가져오기.
+// TodoList todos={todos} />
+const TodoList = ({ todos }) => {
   return (
     <TodoListCss>
+      {/* 부모에서 전달받은 데이터를 사용해보기 */}
+      {todos.map((todo) => (
+        // TodoList 부모 컴포넌트에서, 다시, 자식 컴포넌트인 TodoListItem에게 props로 전달 중.
+        // todo 속성과, key 속성을 전달함.
+        // 목록요소가 출력 시, 반드시, key 를 명시해야함, 그래야 오류가 없고, 속도가 빠름.
+        <TodoListItem todo={todo} key={todo.id} />
+      ))}
+      {/* <TodoListItem />
       <TodoListItem />
       <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
+      <TodoListItem /> */}
+      {/* 자식에서, 더미 데이터를 직접 만들어서 사용했다면 */}
     </TodoListCss>
   );
 };
