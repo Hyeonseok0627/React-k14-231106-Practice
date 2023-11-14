@@ -26,6 +26,7 @@ import TestSass from "./ch9_component/TestSass";
 import StyledComponentsTest from "./ch9_component/StyledComponentsTest";
 import TodoMain from "./ch10_TodoTest/TodoMain";
 import ImmerTest from "./ch12_immerTest/ImmerTest";
+import TestZone2 from "./ch12_immerTest/TestZone2";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route path="styledComponentsTest" element={<StyledComponentsTest />} />
         <Route path="todoMain" element={<TodoMain />} />
         <Route path="immerTest" element={<ImmerTest />} />
+        <Route path="immerTestZone" element={<TestZone2 />} />
       </Routes>
     </BrowserRouter>
   );
