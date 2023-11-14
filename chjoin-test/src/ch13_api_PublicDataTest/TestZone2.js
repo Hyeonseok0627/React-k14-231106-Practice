@@ -56,19 +56,85 @@ function decrease(number, callbackFunction) {
 // })
 
 // 콜백 지옥 함수 모양 보기.
-console.log("작업 시작");
-decrease(0, (result) => {
-  console.log(result);
-  decrease(result, (result) => {
-    console.log(result);
-    decrease(result, (result) => {
-      console.log(result);
-      decrease(result, (result) => {
-        console.log(result);
-        console.log("작업완료");
-      });
-    });
-  });
-});
+// console.log("작업 시작");
+// decrease(0, (result) => {
+//   console.log(result);
+//   decrease(result, (result) => {
+//     console.log(result);
+//     decrease(result, (result) => {
+//       console.log(result);
+//       decrease(result, (result) => {
+//         console.log(result);
+//         console.log("작업완료");
+//       });
+//     });
+//   });
+// });
 
 // promise로 개선하기.
+function decrease2(number) {
+  // resolve : 성공 시 수행할 함수
+  // reject : 실패 시 수행할 함수
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const result = number - 1;
+      if (result < 50) {
+        const error = new Error("error");
+        return reject(error);
+      }
+      resolve(result);
+    }, 1000);
+  });
+  return promise;
+}
+
+// Promise 이용해서, 콜백함수 가독성 높이기.
+// console.log("작업 시작");
+// decrease2(60)
+//   .then((number) => {
+//     console.log(number);
+//     return decrease2(number);
+//   })
+//   .then((number) => {
+//     console.log(number);
+//     return decrease2(number);
+//   })
+//   .then((number) => {
+//     console.log(number);
+//     return decrease2(number);
+//   })
+//   .then((number) => {
+//     console.log(number);
+//     return decrease2(number);
+//   })
+//   .catch((e) => console.log(e));
+
+// async(비동기 문법), await 확인해보기.
+// decrease2 함수 내부에 Promise 구성이 되었고,
+// 이 함수를  async, await 문법으로 변경해서, 조금 더 가독성 및 구성 확인.
+
+async function test() {
+  try {
+    let result = await decrease2(60);
+    console.log(result);
+
+    result = await decrease2(result);
+    console.log(result);
+
+    result = await decrease2(result);
+    console.log(result);
+
+    result = await decrease2(result);
+    console.log(result);
+
+    result = await decrease2(result);
+    console.log(result);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// 작업1
+console.log("작업시작, async await 이용해서 가독성 더 높이기");
+// 작업2, 비동기로 확인.
+test();
