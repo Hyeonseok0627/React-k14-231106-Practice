@@ -1,82 +1,87 @@
-// 모델 구조 :
-// 키 : articles  , 값 : [{기사객체},{기사객체},{기사객체},...]
-// 가지고 올 데이터 :
-// 1) title 2) description 3) url 4) urlToImage
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// css 작업 대상,
-// 1) 이미지 2) 콘텐츠 내용
-const NewsItemCss = styled.div`
-  display: flex;
+import NewsItem from "../model/NewsItem";
+import axios from "axios";
 
-  //이미지, thumbnail
-  .thumbnail {
-    margin-right: 1rem;
-
-    img {
-      display: block;
-      width: 170px;
-      height: 130px;
-      // 해당 사이즈에 비율에 맞게 이미지 크기 조정.
-      object-fit: cover;
-    }
-  }
-
-  .contents {
-    h2 {
-      margin: 0;
-      a {
-        color: blue;
-      }
-    }
-
-    p {
-      margin: 0;
-      line-height: 1.5;
-      margin-top: 0.5rem;
-      //텍스나 내용이 일반적인 공백과 줄 바꿈 규치을 따름.
-      // 브라우저의 너비에 따라 자동으로 줄바꿈됨.
-      white-space: normal;
-    }
-  }
-
-  // & : 현재 요소 , 각 뉴스 목록의 요소
-  // 각 뉴스 아이템 요소가 배치가 될때, 간격을 주겠다.
-  // & + & : 형제 연산자, 요소의 이웃, 같은 요소를 나열 시.
-  //
-  & + & {
-    margin-top: 3rem;
+// 뉴스 아이템 요소를 출력을 감싸는 목록부분에 해당하고,
+// 미디어쿼리 넣어서, 약간 반응형으로, 특정 크기를 기준으로
+// 웹 브라우저의 창의 크기가 변경시, 화면 사이즈 적용되기.
+const NewsListCss = styled.div`
+  box-sizing: border-box;
+  padding-bottom: 3rem;
+  width: 768px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 `;
 
-// 자식 컴포넌트이고, 부모 컴포넌트로 부터, 데이터를 받아와서,
-// 받은 데이터를 출력하는 형태.
-const NewsItem = ({ article }) => {
-  // article : 각 기사의 내용을 담은 객체.
-  // 비구조화 할당으로 각 각 할당.
-  const { title, description, url, urlToImage } = article;
-  return (
-    <NewsItemCss>
-      {/* 조건부 렌더링으로 출력하기.  */}
+// 더미 데이터
+const sampleArticle = {
+  title: "제목",
+  description: "내용",
+  url: "https://www.naver.com",
+  urlToImage: "https://via.placeholder.com/160",
+};
 
-      {urlToImage && (
-        <div className="thumbnail">
-          {/* 링크 클릭시, target="_blank" : 새창 으로 열기 
-          rel="noopener noreferrer" : 새창으로 열었을 때, 
-          원본 링크의 참조라든지, 개인 정보 부분을 막아주기. */}
-          <a href={url} target="_blank" rel="noopener noreferrer" />
-          <img src={urlToImage} alt="thumbnail" />
-        </div>
-      )}
-      <div className="contents">
-        <h2>
-          <a href={url} target="_blank" rel="noopener noreferrer" />
-          {title}
-        </h2>
-        <p>{description}</p>
-      </div>
-    </NewsItemCss>
+const NewsList = () => {
+  // useEffect 이용해서, 마운트시, 최초 1회 데이터 받아오기.
+  // create, update, delete 없어서,
+  // 단순, 데이터 만 가져오기 때문에,
+  // REST API 서버에서 데이터를 다 받으면, articles 에 넣기.
+  const [articles, setArticles] = useState(null);
+  // 만약, 데이터를 받고 있는 중이면, loading 값을 true,
+  // 데이터를 다 받으면, loading 값을 false 로 변경하기.
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const resultData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          "https://newsapi.org/v2/top-headlines?country=kr&category=business&apiKey=87af28a1123a4fcc9c869c0b81bd243c"
+        );
+        //console.log(response.data)
+        // 해당 주소를 입력해서, 모델링 조사할 때, 이미 구조를 다 봤음.
+        setArticles(response.data.articles);
+      } catch (e) {
+        console.log(e);
+      }
+      setLoading(false);
+    }; // resultData async 함수 블록 끝부분,
+    // 비동기 함수 만들어서, 사용하기.
+    resultData();
+  }, []); //의존성 배열 부분의 모양은 빈배열, 최초 1회 마운트시 한번만 호출.
+
+  // 주의사항, 데이터 널 체크하기.
+  if (loading) {
+    return <NewsListCss>데이터 받는중(대기중 ....)</NewsListCss>;
+  }
+
+  // 데이터를 못받아 왔을 경우, 화면에 아무것도 안그리기.
+  if (!articles) {
+    return null;
+  }
+
+  // 로딩도 끝나고, 받아온 데이터가 존재 한다면, 그때 그리기.
+
+  return (
+    <NewsListCss>
+      {articles.map((article) => (
+        // 부모 컴포넌트 : NewList -> 자식 컴포넌트 NewsItem에게 props 로 속성을 전달.
+        // article={article} , 하나의 기사의 내용을 통째로 전달.
+        <NewsItem key={article.url} article={article} />
+      ))}
+      {/* <NewsItem article={sampleArticle} />
+      <NewsItem article={sampleArticle} />
+      <NewsItem article={sampleArticle} />
+      <NewsItem article={sampleArticle} />
+      <NewsItem article={sampleArticle} /> */}
+    </NewsListCss>
   );
 };
 
-export default NewsItem;
+export default NewsList;

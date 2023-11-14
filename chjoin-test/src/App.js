@@ -29,7 +29,7 @@ import ImmerTest from "./ch12_immerTest/ImmerTest";
 import TestZone2 from "./ch12_immerTest/TestZone2";
 import ApiTest from "./ch13_api_PublicDataTest/ApiTest";
 import ApiTestKoreaNews from "./ch13_api_PublicDataTest/ApiTestKoreaNews";
-import MainNews from "./ch13_api_PublicDataTest/component/Main.News";
+import MainNews from "./ch13_api_PublicDataTest/component/MainNews";
 
 function App() {
   return (
