@@ -16,10 +16,10 @@ const TestZone2 = () => {
   };
 
   const sampleData = [
-    { id: 1, name: "lsy", age: "22" },
-    { id: 2, name: "lsy2", age: "22" },
-    { id: 3, name: "lsy3", age: "33" },
-    { id: 4, name: "lsy4", age: "44" },
+    { id: 1, name: "lhs", age: "22" },
+    { id: 2, name: "lhs2", age: "22" },
+    { id: 3, name: "lhs3", age: "33" },
+    { id: 4, name: "lhs4", age: "44" },
   ];
   // 기본 문법 살펴보기.
   // produce ( 원본 데이터, 변경할 업데이트 함수)
@@ -30,12 +30,12 @@ const TestZone2 = () => {
 
   // 데이터 추가
   const nextState2 = produce(array, (draft) => {
-    draft.class = { name: "lsy" };
+    draft.class = { name: "lhs" };
   });
 
   //데이터 추가 2
   const nextState3 = produce(sampleData, (draft) => {
-    draft.push({ id: 2, name: "lsy2", age: "33" });
+    draft.push({ id: 2, name: "lhs2", age: "33" });
   });
 
   //데이터 제거 1, 제거한 원소를 가지는 배열을 출력.
