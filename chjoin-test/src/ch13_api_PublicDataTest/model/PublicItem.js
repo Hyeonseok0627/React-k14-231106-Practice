@@ -1,8 +1,7 @@
-// 모델 구조 :
-// 키 : articles  , 값 : [{기사객체},{기사객체},{기사객체},...]
-// 가지고 올 데이터 :
-// 1) title 2) description 3) url 4) urlToImage
 import React from "react";
+//부산 테마 먹거리 요소로 구성.
+//기존 css 재사용
+// 가지고 올 데이터 부분 변경.
 import styled from "styled-components";
 // css 작업 대상,
 // 1) 이미지 2) 콘텐츠 내용
@@ -25,9 +24,9 @@ const NewsItemCss = styled.div`
   .contents {
     h2 {
       margin: 0;
-      a {
+      /* a {
         color: blue;
-      }
+      } */
     }
 
     p {
@@ -49,36 +48,31 @@ const NewsItemCss = styled.div`
   }
 `;
 
-// 자식 컴포넌트이고, 부모 컴포넌트로 부터, 데이터를 받아와서,
-// 받은 데이터를 출력하는 형태.
-const NewsItem = ({ article }) => {
+const PublicItem = ({ article }) => {
   // article : 각 기사의 내용을 담은 객체.
   // 비구조화 할당으로 각 각 할당.
-  const { title, description, url, urlToImage } = article;
+  // 선택할 요소: 1)MAIN_TITLE, 2) CNTCT_TEL , 3) MAIN_IMG_THUMB , 4) ADDR1
+  const { MAIN_TITLE, CNTCT_TEL, MAIN_IMG_THUMB, ADDR1 } = article;
   return (
     <NewsItemCss>
       {/* 조건부 렌더링으로 출력하기.  */}
 
-      {urlToImage && (
+      {MAIN_IMG_THUMB && (
         <div className="thumbnail">
           {/* 링크 클릭시, target="_blank" : 새창 으로 열기 
           rel="noopener noreferrer" : 새창으로 열었을 때, 
           원본 링크의 참조라든지, 개인 정보 부분을 막아주기. */}
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            <img src={urlToImage} alt="thumbnail" />
-          </a>
+
+          <img src={MAIN_IMG_THUMB} alt="thumbnail" />
         </div>
       )}
       <div className="contents">
-        <h2>
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            {title}
-          </a>
-        </h2>
-        <p>{description}</p>
+        <h2>{MAIN_TITLE}</h2>
+        <p>주소: {ADDR1}</p>
+        <p>연락처: {CNTCT_TEL}</p>
       </div>
     </NewsItemCss>
   );
 };
 
-export default NewsItem;
+export default PublicItem;

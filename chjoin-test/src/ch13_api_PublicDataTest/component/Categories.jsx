@@ -11,6 +11,8 @@ const categories = [
   { name: "science", text: "과학" },
   { name: "sports", text: "스포츠" },
   { name: "technology", text: "기술" },
+  { name: "busanFood", text: "부산테마먹거리" },
+  { name: "busanWalking", text: "부산도보여행" },
 ];
 // css
 const CategoriesBlockCss = styled.div`
@@ -57,6 +59,8 @@ const CategoriesBlockCss = styled.div`
 // `;
 
 // NavLink 방식. 변경.
+// 기존의 styled.태그명 `속성` 이것을 아래처럼 바꾼 것
+// 컴포넌트 적용 styled(컴포넌트) `속성`
 const CategoriesCss = styled(NavLink)`
   font-size: 1.5rem;
   cursor: pointer;
@@ -105,7 +109,8 @@ const CategoriesCss = styled(NavLink)`
 // };
 
 // NavLink 방식. 변경.
-const Categories = ({ category, onSelect }) => {
+// const Categories = ({ category, onSelect }) => : 기존 방식이며, NavLink 방식이면 아래와 같이 사용가능
+const Categories = () => {
   return (
     <CategoriesBlockCss>
       {categories.map((c) => (
