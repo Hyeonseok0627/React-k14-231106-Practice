@@ -6,7 +6,7 @@ import styled from "styled-components";
 const categories = [
   { name: "busanFood", text: "부산테마먹거리" },
   { name: "busanWalking", text: "부산도보여행" },
-  { name: "gyeongnamLeisure", text: "경상남도 레저여행" },
+  { name: "busanFestival", text: "부산축제" },
 ];
 // css
 const CategoriesBlockCss = styled.div`
