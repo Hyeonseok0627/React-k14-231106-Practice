@@ -5,7 +5,7 @@ import React from "react";
 import styled from "styled-components";
 // css 작업 대상,
 // 1) 이미지 2) 콘텐츠 내용
-const NewsItemCss = styled.div`
+const PublicDataItemCss = styled.div`
   display: flex;
 
   //이미지, thumbnail
@@ -54,7 +54,7 @@ const PublicItem = ({ article }) => {
   // 선택할 요소: 1)MAIN_TITLE, 2) CNTCT_TEL , 3) MAIN_IMG_THUMB , 4) ADDR1
   const { MAIN_TITLE, CNTCT_TEL, MAIN_IMG_THUMB, ADDR1 } = article;
   return (
-    <NewsItemCss>
+    <PublicDataItemCss>
       {/* 조건부 렌더링으로 출력하기.  */}
 
       {MAIN_IMG_THUMB && (
@@ -71,7 +71,7 @@ const PublicItem = ({ article }) => {
         <p>주소: {ADDR1}</p>
         <p>연락처: {CNTCT_TEL}</p>
       </div>
-    </NewsItemCss>
+    </PublicDataItemCss>
   );
 };
 

@@ -5,7 +5,7 @@ import React from "react";
 import styled from "styled-components";
 // css 작업 대상,
 // 1) 이미지 2) 콘텐츠 내용
-const NewsItemCss = styled.div`
+const PublicDataItemCss = styled.div`
   display: flex;
 
   //이미지, thumbnail
@@ -48,13 +48,13 @@ const NewsItemCss = styled.div`
   }
 `;
 
-const PublicItem3 = (article) => {
+const PublicItem3 = ({ article }) => {
   // article : 각 기사의 내용을 담은 객체.
   // 비구조화 할당으로 각 각 할당.
-  // 선택할 요소: 1)data_title, 2)telno 3)fileurl1 4)user_address
-  const { data_title, telno, fileurl1, user_address } = article;
+  // 선택할 요소: 1)data_title, 2)telno 3)fileurl1 4)user_address 5)data_content
+  const { data_title, telno, fileurl1, user_address, data_content } = article;
   return (
-    <NewsItemCss>
+    <PublicDataItemCss>
       {/* 조건부 렌더링으로 출력하기.  */}
 
       {fileurl1 && (
@@ -70,8 +70,9 @@ const PublicItem3 = (article) => {
         <h2>{data_title}</h2>
         <p>주소: {user_address}</p>
         <p>연락처: {telno}</p>
+        <p>설명 : {data_content}</p>
       </div>
-    </NewsItemCss>
+    </PublicDataItemCss>
   );
 };
 

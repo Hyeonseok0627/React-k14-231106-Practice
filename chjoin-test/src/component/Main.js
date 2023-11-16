@@ -15,7 +15,6 @@ import { Button } from "antd";
 // 공식 문서
 // https://styled-components.com/docs/basics#getting-started
 import styled from "styled-components";
-import { Component } from "react";
 
 // styled-component 사용해보기
 // 예제
@@ -298,7 +297,7 @@ const Main = () => {
             title="newsPageTest/:category"
             type="primary"
             onClick={() => {
-              navigate("/newsPageTest/:category");
+              navigate("/newsPageTest/all");
             }}
           >
             newsPageTest/:category 확인
@@ -312,6 +311,16 @@ const Main = () => {
             }}
           >
             contextAPITest 확인
+          </Button>
+          <br />
+          <Button
+            title="publicDataPageTest/:category"
+            type="primary"
+            onClick={() => {
+              navigate("/publicDataPageTest/all");
+            }}
+          >
+            publicDataPageTest/:category 확인
           </Button>
         </Container>
       </div>

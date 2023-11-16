@@ -31,7 +31,7 @@ const PublicDataList = ({ category }) => {
   // 데이터를 다 받으면, loading 값을 false 로 변경하기.
   const [loading, setLoading] = useState(false);
 
-  //상태변수, 뉴스(0), 공공데이터(1,2)에 따라서
+  //상태변수, 공공데이터(0,1,2)에 따라서
   const [datatype, setDatatype] = useState(0);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const PublicDataList = ({ category }) => {
 
       try {
         // 카테고리별로, url 주소 변경하기.
-        const query = category === `&category=${category}`;
+        const query = category === "all" ? "" : `&category=${category}`;
 
         switch (query) {
           case "&category=busanFood":
@@ -53,18 +53,21 @@ const PublicDataList = ({ category }) => {
             break;
           case "&category=busanWalking":
             // 부산도보여행 API 주소, busanWalking
-            const response1 = await axios.get(
+            const response4 = await axios.get(
               `https://apis.data.go.kr/6260000/WalkingService/getWalkingKr?serviceKey=ALRX9GpugtvHxcIO%2FiPg1vXIQKi0E6Kk1ns4imt8BLTgdvSlH%2FAKv%2BA1GcGUQgzuzqM3Uv1ZGgpG5erOTDcYRQ%3D%3D&pageNo=1&numOfRows=100&resultType=json`
             );
-            setArticles(response1.data.getWalkingKr.item);
+            setArticles(response4.data.getWalkingKr.item);
             // 상태변수, 타입 지정.
-            setDatatype(1);
+            setDatatype(2);
             break;
           case "&category=gyeongnamLeisure":
+            // 경상남도 레저 API 주소, gyeongnamLeisure
             const response2 = await axios.get(
               `https://apis.data.go.kr/6480000/gyeongnamtourleisure/gyeongnamtourleisurelist?serviceKey=3TcDecXcikcH9bwW125ToBy%2BMICqkvRWbz%2BvVmyHgA1G4%2Fe0RNqMszPSU4aiz9HbxqEw6M8PJz3gNiYXhhXJjg%3D%3D&pageNo=1&numOfRows=10&resultType=json`
             );
-            setArticles(response2.data.gyeongnamtourleisurelist.items.item);
+            setArticles(
+              response2.data.gyeongnamtourleisurelist.body.items.item
+            );
             // 상태변수, 타입 지정.
             setDatatype(2);
             break;
