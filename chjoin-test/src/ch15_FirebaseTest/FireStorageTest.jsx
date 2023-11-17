@@ -8,6 +8,9 @@ import { storage } from "./firebaseConfig";
 // reactStorage/
 
 // 파일 선택하는 input , 보여주기 등.
+//images/* : 이미지 전체 선택
+// async() : 비동기화
+// reactStorage/ : 해당폴더 하위경로로 지정
 const FireStorageTest = () => {
   const [uploadFile, setUploadFile] = useState();
   const onFileChange = (event) => {
@@ -23,7 +26,7 @@ const FireStorageTest = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const storageRef = ref(storage, "reactStorage/test");
+    const storageRef = ref(storage, "reactStorage/");
     // 'file' comes from the Blob or File API
 
     uploadBytes(storageRef, uploadFile).then((snapshot) => {
