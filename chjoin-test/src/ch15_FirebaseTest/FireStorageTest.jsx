@@ -23,10 +23,10 @@ const FireStorageTest = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const storageRef = ref(storage, "reactStorage/");
+    const storageRef = ref(storage, "reactStorage/test");
     // 'file' comes from the Blob or File API
 
-    uploadBytes(storageRef, thisFile).then((snapshot) => {
+    uploadBytes(storageRef, uploadFile).then((snapshot) => {
       console.log("Uploaded a blob or file!");
     });
   };
