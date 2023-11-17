@@ -29,6 +29,7 @@ import ApiTestKoreaNews from "./ch13_api_PublicDataTest/ApiTestKoreaNews";
 import NewsPage from "./ch13_api_PublicDataTest/page/NewsPage";
 import TestColorMain from "./ch14_ContextAPITest/TestColorMain";
 import PublicDataPage from "./ch13-1_API_Practice/page/PublicDataPage";
+import FireMain from "./ch15_FirebaseTest/FireMain";
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function App() {
           path="publicDataPageTest/:category"
           element={<PublicDataPage />}
         />
+        <Route path="firebaseTest" element={<FireMain />} />
       </Routes>
     </BrowserRouter>
   );
